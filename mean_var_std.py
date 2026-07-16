@@ -1,14 +1,20 @@
 import numpy as np
 
-def calculate(list):
-    if len(list) != 9:
-        print("List must contain nine numbers.")
-    else:
-        calculations={}
-        y = np.array(list).reshape(3,3)
-        stats = ["mean", "variance", "standard division", "max", "min", "sum"]
-        funs = [y.mean, y.var, y.std, y.max, y.min, y.sum]
-        axes= [0 ,1, None]
-        for stat, fun in zip(stats, funs):
-            calculations[stat] = [fun(axis=ax).tolist() for ax in axes]
-        return calculations
+def calculate(values):
+    if len(values) != 9:
+        raise ValueError("List must contain nine numbers.")
+
+    calculations = {}
+    y = np.array(values).reshape(3, 3)
+
+    stats = ["mean", "variance", "standard deviation", "max", "min", "sum"]
+    functions = [y.mean, y.var, y.std, y.max, y.min, y.sum]
+    axes = [0, 1, None]
+
+    for stat, function in zip(stats, functions):
+        calculations[stat] = [
+            function(axis=axis).tolist()
+            for axis in axes
+        ]
+
+    return calculations
